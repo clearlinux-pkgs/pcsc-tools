@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x78A1B4DFE8F9C57E (ludovic.rousseau@free.fr)
 #
 Name     : pcsc-tools
-Version  : 1.6.0
-Release  : 3
-URL      : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.0.tar.bz2
-Source0  : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.0.tar.bz2
-Source1  : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.0.tar.bz2.asc
+Version  : 1.6.1
+Release  : 4
+URL      : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.1.tar.bz2
+Source0  : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.1.tar.bz2
+Source1  : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.1.tar.bz2.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -17,6 +17,9 @@ Requires: pcsc-tools-bin = %{version}-%{release}
 Requires: pcsc-tools-data = %{version}-%{release}
 Requires: pcsc-tools-man = %{version}-%{release}
 BuildRequires : pkgconfig(libpcsclite)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 Some tools to be used with smart cards and PC/SC
@@ -48,23 +51,23 @@ man components for the pcsc-tools package.
 
 
 %prep
-%setup -q -n pcsc-tools-1.6.0
-cd %{_builddir}/pcsc-tools-1.6.0
+%setup -q -n pcsc-tools-1.6.1
+cd %{_builddir}/pcsc-tools-1.6.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1671054578
+export SOURCE_DATE_EPOCH=1673636730
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -76,7 +79,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1671054578
+export SOURCE_DATE_EPOCH=1673636730
 rm -rf %{buildroot}
 %make_install
 
