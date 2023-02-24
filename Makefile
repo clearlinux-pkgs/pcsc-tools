@@ -1,5 +1,5 @@
 PKG_NAME := pcsc-tools
-URL = http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.1.tar.bz2
+URL = https://pcsc-tools.apdu.fr/pcsc-tools-1.6.2.tar.bz2
 ARCHIVES = 
 
 include ../common/Makefile.common

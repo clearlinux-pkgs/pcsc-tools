@@ -5,16 +5,17 @@
 # Source0 file verified with key 0x78A1B4DFE8F9C57E (ludovic.rousseau@free.fr)
 #
 Name     : pcsc-tools
-Version  : 1.6.1
-Release  : 4
-URL      : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.1.tar.bz2
-Source0  : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.1.tar.bz2
-Source1  : http://ludovic.rousseau.free.fr/softwares/pcsc-tools/pcsc-tools-1.6.1.tar.bz2.asc
+Version  : 1.6.2
+Release  : 5
+URL      : https://pcsc-tools.apdu.fr/pcsc-tools-1.6.2.tar.bz2
+Source0  : https://pcsc-tools.apdu.fr/pcsc-tools-1.6.2.tar.bz2
+Source1  : https://pcsc-tools.apdu.fr/pcsc-tools-1.6.2.tar.bz2.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: pcsc-tools-bin = %{version}-%{release}
 Requires: pcsc-tools-data = %{version}-%{release}
+Requires: pcsc-tools-license = %{version}-%{release}
 Requires: pcsc-tools-man = %{version}-%{release}
 BuildRequires : pkgconfig(libpcsclite)
 # Suppress stripping binaries
@@ -29,6 +30,7 @@ Some tools to be used with smart cards and PC/SC
 Summary: bin components for the pcsc-tools package.
 Group: Binaries
 Requires: pcsc-tools-data = %{version}-%{release}
+Requires: pcsc-tools-license = %{version}-%{release}
 
 %description bin
 bin components for the pcsc-tools package.
@@ -42,6 +44,14 @@ Group: Data
 data components for the pcsc-tools package.
 
 
+%package license
+Summary: license components for the pcsc-tools package.
+Group: Default
+
+%description license
+license components for the pcsc-tools package.
+
+
 %package man
 Summary: man components for the pcsc-tools package.
 Group: Default
@@ -51,15 +61,15 @@ man components for the pcsc-tools package.
 
 
 %prep
-%setup -q -n pcsc-tools-1.6.1
-cd %{_builddir}/pcsc-tools-1.6.1
+%setup -q -n pcsc-tools-1.6.2
+cd %{_builddir}/pcsc-tools-1.6.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1673636730
+export SOURCE_DATE_EPOCH=1677196958
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -79,8 +89,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1673636730
+export SOURCE_DATE_EPOCH=1677196958
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pcsc-tools
+cp %{_builddir}/pcsc-tools-%{version}/LICENCE %{buildroot}/usr/share/package-licenses/pcsc-tools/dfac199a7539a404407098a2541b9482279f690d || :
 %make_install
 
 %files
@@ -96,6 +108,10 @@ rm -rf %{buildroot}
 %files data
 %defattr(-,root,root,-)
 /usr/share/pcsc/smartcard_list.txt
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pcsc-tools/dfac199a7539a404407098a2541b9482279f690d
 
 %files man
 %defattr(0644,root,root,0755)
