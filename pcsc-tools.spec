@@ -8,11 +8,11 @@
 # Source0 file verified with key 0x78A1B4DFE8F9C57E (ludovic.rousseau@free.fr)
 #
 Name     : pcsc-tools
-Version  : 1.7.0
-Release  : 7
-URL      : https://pcsc-tools.apdu.fr/pcsc-tools-1.7.0.tar.bz2
-Source0  : https://pcsc-tools.apdu.fr/pcsc-tools-1.7.0.tar.bz2
-Source1  : https://pcsc-tools.apdu.fr/pcsc-tools-1.7.0.tar.bz2.asc
+Version  : 1.7.1
+Release  : 8
+URL      : https://pcsc-tools.apdu.fr/pcsc-tools-1.7.1.tar.bz2
+Source0  : https://pcsc-tools.apdu.fr/pcsc-tools-1.7.1.tar.bz2
+Source1  : https://pcsc-tools.apdu.fr/pcsc-tools-1.7.1.tar.bz2.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -74,10 +74,10 @@ man components for the pcsc-tools package.
 
 
 %prep
-%setup -q -n pcsc-tools-1.7.0
-cd %{_builddir}/pcsc-tools-1.7.0
+%setup -q -n pcsc-tools-1.7.1
+cd %{_builddir}/pcsc-tools-1.7.1
 pushd ..
-cp -a pcsc-tools-1.7.0 buildavx2
+cp -a pcsc-tools-1.7.1 buildavx2
 popd
 
 %build
@@ -85,7 +85,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1702044522
+export SOURCE_DATE_EPOCH=1704139665
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -137,7 +137,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1702044522
+export SOURCE_DATE_EPOCH=1704139665
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pcsc-tools
 cp %{_builddir}/pcsc-tools-%{version}/LICENCE %{buildroot}/usr/share/package-licenses/pcsc-tools/dfac199a7539a404407098a2541b9482279f690d || :
